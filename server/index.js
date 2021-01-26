@@ -1,5 +1,5 @@
 const express = require('express')
-
+//app.use相当于把请求拦截下来
 const app = express()
 app.use(require('cors')())//解决跨域
 app.use(express.json())//使用json格式
@@ -10,10 +10,10 @@ app.use('/upload', express.static(__dirname + '/upload'))
 //引入并使用数据库
 require('./plugins/db.js')(app)
 // 把后端路由引入，并执行。把app实例传入，admin中就可以使用了。
-require('./routes/admin')(app)
+require('./routes/admin/index.js')(app)
 
 
-
+//一般上线都用80，因为不写端口。浏览器自动添加80
 app.listen(3000, () => {
     console.log('http://localhost:3000');
 })

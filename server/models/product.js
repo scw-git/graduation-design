@@ -8,6 +8,7 @@ const schema = new mongoose.Schema({
     time: { type: String },
     desc: { type: String },
     imgUrl: { type: Array },
+    discount: { type: Boolean },
 
 })
 module.exports = mongoose.model('product', schema)
