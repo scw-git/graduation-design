@@ -22,8 +22,8 @@ module.exports = app => {
         res.send(model)
     })
     //删除接口
-    router.delete('/productType', async (req, res) => {
-        await productType.findByIdAndDelete(req.query.id)
+    router.delete('/productType/:id', async (req, res) => {
+        await productType.findByIdAndDelete(req.params.id, req.body)
         res.send({
             status: 200,
             success: true,
