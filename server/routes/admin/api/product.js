@@ -11,8 +11,23 @@ module.exports = app => {
     })
     //商品查询接口
     router.get('/product', async (req, res) => {
+        // let obj = {}
+        // if (req.query.type) {
+        //     obj = req.query.type
+        // } else if (req.query.recommend) {
+        //     obj = req.query.recommend
+        // } else {
+        //     obj = {}
+        // }
+
         let type = req.query.type//查询指定字段：{type:'手机'}
-        let obj = req.query.type ? { type } : {}
+        let obj1 = req.query.type ? { type } : {}
+
+        let recommend = req.query.recommend//查询推荐商品
+        let obj2 = req.query.recommend ? { recommend } : {}
+
+        let obj = req.query.type ? obj1 : obj2
+        console.log(obj)
 
         let currentPage = req.query.currentPage || 1 //客户端传过来的当前页
         let limit = (req.query.limit) * 1 || null //每一页显示的条数，limit要转化为数字类型
