@@ -6,36 +6,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .div {
+        .fa::after {
+            content: '';
+            display: block;
+            clear: both;
+            /* overflow: hidden; */
+        }
+
+        .fa .div {
             width: 100px;
-            height: 100px;
+            height: 80px;
+            background-color: red;
+            float: left;
 
         }
 
-        .div img {
-            width: 100%;
+        .div1 {
+
+            width: 100px;
+            height: 100px;
+            background-color: green;
         }
     </style>
 </head>
 
 <body>
-    <div class="div"> <img src="./phone.jpg" alt=""></div>
-    <script>
-        let obj = {
-            a: 1,
-            b: 2
-        }
-        let arr = [1, 2, 3]
-        // for (let i of obj) {
-        //     console.log(i)
-        // }
-        // for (let i of arr) {
-        //     console.log(i)
-        // }
-        arr.forEach((currentValue, index, arr) => {
-            console.log(arr)
 
-        });
+    <div class="fa">
+        <div class="div"> </div>
+    </div>
+
+    <div class="div1"></div>
+    <script>
+        let arr = [3123, 22654, 423, 53, 23, 43, 234]
+        console.log(Math.max.apply(Math, arr))
+
+        //防抖（触发事件后，在n秒内执行函数。如果在n秒内在次执行，则时间重新计算）
+        function fn(fn) {
+            let timer
+            return function () {
+                clearTimeout(timer)
+                setTimeout(fn, timeout);
+            }
+        }
+        // 节流（在n秒内只执行一次）
+        function jielie() {
+            let timer
+            return function () {
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        fn()
+                        timer = false
+                    }, time)
+                }
+            }
+
+        }
+        function getRandomArrayElements(shuffled, count) {
+            var i = arr.length, min = i - count, temp, index;
+            while (i-- > min) {
+                index = Math.floor((i + 1) * Math.random());
+                temp = shuffled[index];
+                shuffled[index] = shuffled[i];
+                shuffled[i] = temp;
+            }
+            return shuffled.slice(count - 1);
+        }
+
+        function fn1(arr, n) {
+            let newArr = []
+            while (newArr.length < n) {
+                let ran = Math.ceil(Math.random() * arr.length)
+                if (ran < arr.length) {
+                    newArr.push(arr[ran])
+                    arr.splice(ran, 1)
+                }
+            }
+            return newArr
+        }
+
+
+
+        var items = ['1', '2', '4', '5', '6', '7', '8', '9', '10'];
+
+        console.log(fn1(items, 3))
+        console.log(getRandomArrayElements(items, 4));
+        var g
+        console.log(g)
     </script>
 </body>
 

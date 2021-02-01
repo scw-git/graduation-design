@@ -9,24 +9,22 @@ module.exports = app => {
         const model = await product.create(req.body)
         res.send(model)
     })
+    //根据id查询详情信息
+    router.get('/productDetail', async (req, res) => {
+        let id = req.query.id
+        let data = await product.findById(id)
+        res.send(data)
+    })
     //商品查询接口
     router.get('/product', async (req, res) => {
-        // let obj = {}
-        // if (req.query.type) {
-        //     obj = req.query.type
-        // } else if (req.query.recommend) {
-        //     obj = req.query.recommend
-        // } else {
-        //     obj = {}
-        // }
-
         let type = req.query.type//查询指定字段：{type:'手机'}
         let obj1 = req.query.type ? { type } : {}
 
         let recommend = req.query.recommend//查询推荐商品
         let obj2 = req.query.recommend ? { recommend } : {}
 
-        let obj = req.query.type ? obj1 : obj2
+        // let obj = req.query.type ? obj1 : obj2
+        let obj = { ...obj1, ...obj2 }
         console.log(obj)
 
         let currentPage = req.query.currentPage || 1 //客户端传过来的当前页
@@ -34,7 +32,6 @@ module.exports = app => {
         let start = (currentPage - 1) * limit || 0 //指定查询的起始位置
         let count = await product.countDocuments(obj)//获取对应商品所有的总条数，
         let total = Math.ceil(count / limit) //总分页数
-
         const data = await product
             .find(obj)
             .limit(limit)
