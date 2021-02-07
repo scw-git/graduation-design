@@ -25,7 +25,7 @@ module.exports = app => {
 
         // let obj = req.query.type ? obj1 : obj2
         let obj = { ...obj1, ...obj2 }
-        console.log(obj)
+        // console.log(obj)
 
         let currentPage = req.query.currentPage || 1 //客户端传过来的当前页
         let limit = (req.query.limit) * 1 || null //每一页显示的条数，limit要转化为数字类型
